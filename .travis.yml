@@ -2,7 +2,9 @@ language: node_js
 node_js: stable
 sudo: required
 before_install:
-  - sudo apt-get install ruby ruby-dev ruby-compass
+  - sudo apt-get install ruby ruby-dev
+  - sudo gem update --system
+  - sudo gem install sass compass
 deploy:
   provider: heroku
   api_key:
