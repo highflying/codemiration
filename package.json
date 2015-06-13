@@ -1,0 +1,22 @@
+{
+  "name": "codemiration",
+  "version": "0.0.1",
+  "description": "Create code to be admired",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highflying/codemiration.git"
+  },
+  "keywords": [
+    "codemiration"
+  ],
+  "author": "Ben Rogers <ben@bdr.org>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/highflying/codemiration/issues"
+  },
+  "homepage": "https://github.com/highflying/codemiration#readme"
+}
