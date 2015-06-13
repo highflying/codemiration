@@ -1,2 +1,9 @@
 language: node_js
 node_js: stable
+deploy:
+  provider: heroku
+  api_key:
+    secure: pOlbeGDx0X7llNPpudCKEWs2c/QYRW5tOmZtRSHiXQX32QMJUg3DtSHGjujtFGRcA+71RYxr/+oWfdYfBsVTROPDgPz1qidceuJOuEWLuWf4hfedhElYzUWKXK8oKTYAMaermoddsoVgM2SMdBOUCzVIOUtUL3/rxthSuSSD9okua8axi3oCLRaHrOohfXHSnfQZEBKlpI++Dy6PAMM1VJlCB+spHA1IIo1tHESNHLAD/baDVhicccr9y2uU7GRaT40caapXtpCDe4XOMTEK/6+B4UvLy0hLGTavaXOaCv7Isg6X3qsJ4jlSwFS+8+XeqNb/xyr1tCuT0P5EpfWdBPkFnDjV4aovKXVuI6upw4zA/qQVueDd46fncxJMc9Ld+8LrYgVCvMgknFpKNbsv7Xn6nZYLo2cSIYMhvcnTBfCbYIAPxJZXWJhHmmOznHJsCkxl2fKkG6JRzxs6fD7uYafQ8/+CNndBplQ/ZZNo/SLG5/HdABJsg2kCrNVdvLrOgHWx77MwGwCTN8Y3iexZ70+Xe7QjH6XQpiw3gBrxf38JX0en7Uz3zcNUWkaDoTfoSvTlG7VOqLaM86MRsgM5KQBPjwuFzLTB79d+hrl/f7D1JWPoE3jEhARKhnPifie6CeU84UsKSBP4KSGh12wf04ATX1R4qjFiThUmhu7YFBE=
+  app: codemiration
+  on:
+    repo: highflying/codemiration
