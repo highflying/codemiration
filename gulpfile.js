@@ -2,8 +2,7 @@ var gulp      = require("gulp");
 var minifyCSS = require("gulp-minify-css");
 var concat    = require("gulp-concat");
 var compass   = require("gulp-compass");
-var uglify    = require('gulp-uglify');
-
+var uglify    = require("gulp-uglify");
 
 gulp.task("default", ["minify-css", "build-js"]);
 
@@ -11,9 +10,9 @@ gulp.task("compile-sass", function () {
   return gulp
     .src("sass/*.scss")
     .pipe(compass({
-      config_file: "./config/compass.rb",
-      css:         "static/css",
-      sass:        "sass",
+      project: __dirname,
+      css:     "static/css",
+      sass:    "sass",
     }))
     .pipe(gulp.dest("./static/css"));
 });
