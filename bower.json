@@ -1,0 +1,24 @@
+{
+  "name": "codemiration",
+  "version": "0.0.1",
+  "homepage": "https://github.com/highflying/codemiration",
+  "authors": [
+    "Ben Rogers <ben@bdr.org>"
+  ],
+  "description": "Create code to be admired",
+  "main": "server.js",
+  "keywords": [
+    "codemiration"
+  ],
+  "license": "GPL-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.4"
+  }
+}
