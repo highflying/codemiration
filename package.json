@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/highflying/codemiration/issues"
   },
-  "homepage": "https://github.com/highflying/codemiration#readme"
+  "homepage": "https://github.com/highflying/codemiration#readme",
+  "devDependencies": {
+    "bower": "^1.4.1"
+  }
 }
