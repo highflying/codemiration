@@ -11,7 +11,7 @@ gulp.task("compile-sass", function () {
   return gulp
     .src("sass/*.scss")
     .pipe(compass({
-      config_file: "./config.rb",
+      config_file: "./config/compass.rb",
       css:         "static/css",
       sass:        "sass",
     }))
