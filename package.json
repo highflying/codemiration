@@ -4,7 +4,7 @@
   "description": "Create code to be admired",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,12 @@
   },
   "homepage": "https://github.com/highflying/codemiration#readme",
   "devDependencies": {
-    "bower": "^1.4.1"
+    "bower": "^1.4.1",
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "express": "^4.12.4",
+    "swig": "^1.4.2"
   }
 }
