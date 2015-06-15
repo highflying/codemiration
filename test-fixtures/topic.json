@@ -1,0 +1,15 @@
+{
+  "title": "Comments",
+  "summary": "Aim for zero comments.",
+  "rationale": [
+    "Only comments that describe why code is doing what it is doing are valid, such as business rules.",
+    "If you have to state what your code is doing then your code is not clear enough."
+    "Over time comments may become irrelevant if not updated along with code changes, doubling up maintenence costs. If not updated they become misleading."
+  ],
+  "references": [
+    {
+      "book": "essential-skills-for-the-agile-developer",
+      "page": 8
+    }
+  ]
+}
