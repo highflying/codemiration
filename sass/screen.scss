@@ -48,3 +48,10 @@
 // Utility classes
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/utilities";
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
+
+div.footer {
+  @extend .text-center;
+  
+  padding:    10px;
+  border-top: 1px solid #ccc;
+}
