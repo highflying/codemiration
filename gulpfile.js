@@ -8,9 +8,13 @@ gulp.task("default", ["minify-css", "build-js"]);
 
 gulp.task("compile-sass", function () {
   return gulp
-    .src("sass/*.scss")
+    .src("sass/**/*.scss")
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest("./static/css"));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch('./sass/**/*.scss', ['compile-sass']);
 });
 
 gulp.task("minify-css", ["compile-sass"], function() {
