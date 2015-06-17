@@ -127,4 +127,20 @@ describe("topics", function () {
     });
   });
 
+  describe("getAll", function () {
+    it("should return all topics", function (done) {
+      expect(topics).to.respondTo("getAll");
+
+      topics.loadAll(
+        fixturePath + "topics",
+        function (err, expectedTopics) {
+          var allTopics = topics.getAll();
+          expect(allTopics).to.be.an("object");
+          expect(allTopics).to.deep.equal(expectedTopics);
+
+          done();
+        }
+      );
+    });
+  });
 });

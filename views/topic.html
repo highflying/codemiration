@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+  <h2>{{ topic.title }}</h2>
+
+  <p>{{ topic.summary }}</p>
+
+  <h3>Rationale</h3>
+  <ul>
+    {% for item in topic.rationale %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if topic.references %}
+    <h3>References</h3>
+    <dl>
+      {% for reference in topic.references %}
+        {% set book = reference.data %}
+        <dt>{{ book.title }}{% if book.page %}, page {{ book.page }}{% endif %}</dt>
+        <dd>
+          {% if book.subtitle %}
+            {{ book.subtitle }}<br />
+          {% endif %}
+
+          {% if book.author && book.author.length %}
+            by
+            {% for author in book.author %}
+              {{ author }}{% if !loop.last %},{% else %}<br />{% endif %}
+            {% endfor %}
+          {% endif %}
+
+          {% if book.publisher -%}
+            {{ book.publisher -}}
+          {%- endif -%}
+
+          {%- if book.publisher && book.year -%}
+            ,
+          {% endif -%}
+
+          {%- if book.year -%}
+            {{ book.year }}
+          {%- endif -%}
+
+          {%- if book.publisher || book.year -%}
+            <br />
+          {% endif %}
+
+          {% if book.isbn %}
+            ISBN {{ book.isbn }}<br />
+          {% endif %}
+        </dd>
+      {% endfor %}
+    </dl>
+  {% endif %}
+{% endblock %}
