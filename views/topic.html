@@ -17,7 +17,7 @@
     <dl>
       {% for reference in topic.references %}
         {% set book = reference.data %}
-        <dt>{{ book.title }}{% if book.page %}, page {{ book.page }}{% endif %}</dt>
+        <dt>{{ book.title }}{% if reference.page %}, page {{ reference.page }}{% endif %}</dt>
         <dd>
           {% if book.subtitle %}
             {{ book.subtitle }}<br />
