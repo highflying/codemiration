@@ -14,7 +14,7 @@ gulp.task("compile-sass", function () {
 });
 
 gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['compile-sass']);
+  gulp.watch('./sass/**/*.scss', ['minify-css']);
 });
 
 gulp.task("minify-css", ["compile-sass"], function() {
