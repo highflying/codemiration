@@ -1,0 +1,38 @@
+{
+  "title": "Book",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "author": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "year": {
+      "description": "Year of publication",
+      "type": "integer",
+      "minimum": 1980,
+      "maximum": 2015
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "isbn": {
+      "type": "string",
+      "pattern": "^[0-9]{13}$"
+    }
+  },
+  "required": ["id", "title", "publisher", "year", "isbn"],
+  "additionalProperties": false
+}
