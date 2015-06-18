@@ -1,19 +1,21 @@
-var expect = require("chai").expect;
+var tests  = require("../test-helpers");
+var expect = tests.expect;
 var topics = require("../lib/topics.js");
 
-var fixturePath = __dirname + "/../test-fixtures/";
+var topicId   = "topic";
+var topicPath = tests.fixturePath + "topics/";
 
 describe("topics", function () {
   describe("findFiles()", function () {
     it("should find all topics in a given path", function (done) {
       expect(topics).to.respondTo("findFiles");
 
-      topics.findFiles(fixturePath + "topics", function (err, fileList) {
-        expect(err).to.be.a("null");
+      topics.findFiles(topicPath, function (err, fileList) {
+        expect(err).to.be.null();
         expect(fileList).to.be.an("array");
         expect(fileList).to.deep.equal([
-          fixturePath + "topics/1invalid-json-topic.json",
-          fixturePath + "topics/topic.json",
+          topicPath + "1invalid-json-topic.json",
+          topicPath + topicId + ".json",
         ]);
 
         done();
@@ -25,7 +27,7 @@ describe("topics", function () {
         "made up path",
         function (err, fileList) {
           expect(err).to.be.an.instanceOf(Error);
-          expect(fileList).to.be.undefined;
+          expect(fileList).to.be.undefined();
 
           return done();
         }
@@ -38,8 +40,8 @@ describe("topics", function () {
     it("should read valid json file", function (done) {
       expect(topics).to.respondTo("load");
 
-      topics.load(fixturePath + "topics/topic.json", function (err, topicData) {
-        expect(err).to.be.a("null");
+      topics.load(topicPath + topicId + ".json", function (err, topicData) {
+        expect(err).to.be.null();
         expect(topicData).to.be.an("object");
 
         expect(topicData.title).to.be.a("string");
@@ -53,7 +55,7 @@ describe("topics", function () {
 
     it("should error on a missing file", function (done) {
       topics.load("made-up-filename.json", function (err, topicData) {
-        expect(topicData).to.be.a("undefined");
+        expect(topicData).to.be.undefined();
         expect(err).to.be.an.instanceOf(Error);
 
         done();
@@ -61,8 +63,8 @@ describe("topics", function () {
     });
 
     it("should error on invalid json", function (done) {
-      topics.load(fixturePath + "topics/1invalid-json-topic.json", function (err, topicData) {
-        expect(topicData).to.be.an("undefined");
+      topics.load(topicPath + "1invalid-json-topic.json", function (err, topicData) {
+        expect(topicData).to.be.undefined();
         expect(err).to.be.an.instanceOf(Error);
 
         done();
@@ -75,15 +77,15 @@ describe("topics", function () {
       expect(topics).to.respondTo("loadAll");
 
       topics.load(
-        fixturePath + "topics/topic.json",
+        topicPath + topicId + ".json",
         function (err, topicData) {
           topics.loadAll(
-            fixturePath + "topics",
+            topicPath,
             function (err, allTopics) {
               expect(allTopics).to.be.an("object");
               expect(Object.keys(allTopics)).to.have.length(1);
-              expect(allTopics).to.have.property("topic");
-              expect(allTopics.topic).to.deep.equal(topicData);
+              expect(allTopics).to.have.property(topicId);
+              expect(allTopics[topicId]).to.deep.equal(topicData);
               done();
             }
           );
@@ -96,7 +98,7 @@ describe("topics", function () {
         "made up path",
         function (err, allTopics) {
           expect(err).to.be.an.instanceOf(Error);
-          expect(allTopics).to.be.undefined;
+          expect(allTopics).to.be.undefined();
 
           return done();
         }
@@ -109,9 +111,9 @@ describe("topics", function () {
       expect(topics).to.respondTo("get");
 
       topics.load(
-        fixturePath + "topics/topic.json",
+        topicPath + topicId + ".json",
         function (err, expectedData) {
-          var topicData = topics.get("topic");
+          var topicData = topics.get(topicId);
           expect(topicData).to.be.an("object");
           expect(topicData).to.deep.equal(expectedData);
 
@@ -123,7 +125,7 @@ describe("topics", function () {
     it("should handle unknown ids", function () {
       var topicData = topics.get("made-up-id");
 
-      expect(topicData).to.be.undefined;
+      expect(topicData).to.be.undefined();
     });
   });
 
@@ -132,7 +134,7 @@ describe("topics", function () {
       expect(topics).to.respondTo("getAll");
 
       topics.loadAll(
-        fixturePath + "topics",
+        topicPath,
         function (err, expectedTopics) {
           var allTopics = topics.getAll();
           expect(allTopics).to.be.an("object");

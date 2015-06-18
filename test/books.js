@@ -1,21 +1,21 @@
-var expect = require("chai").expect;
+var tests  = require("../test-helpers");
+var expect = tests.expect;
 var books  = require("../lib/books.js");
 
-var fixturePath = __dirname + "/../test-fixtures/";
-
-var bookId = "book";
+var bookId    = "book";
+var booksPath = tests.fixturePath + "books/";
 
 describe("books", function () {
   describe("findFiles()", function () {
     it("should find all books in a given path", function (done) {
       expect(books).to.respondTo("findFiles");
 
-      books.findFiles(fixturePath + "books", function (err, fileList) {
-        expect(err).to.be.a("null");
+      books.findFiles(booksPath, function (err, fileList) {
+        expect(err).to.be.null();
         expect(fileList).to.be.an("array");
         expect(fileList).to.deep.equal([
-          fixturePath + "books/1invalid-json-book.json",
-          fixturePath + "books/" + bookId + ".json",
+          booksPath + "1invalid-json-book.json",
+          booksPath + bookId + ".json",
         ]);
 
         done();
@@ -27,7 +27,7 @@ describe("books", function () {
         "made up path",
         function (err, fileList) {
           expect(err).to.be.an.instanceOf(Error);
-          expect(fileList).to.be.undefined;
+          expect(fileList).to.be.undefined();
 
           return done();
         }
@@ -40,8 +40,8 @@ describe("books", function () {
     it("should read valid json file", function (done) {
       expect(books).to.respondTo("load");
 
-      books.load(fixturePath + "books/" + bookId + ".json", function (err, bookData) {
-        expect(err).to.be.a("null");
+      books.load(booksPath + bookId + ".json", function (err, bookData) {
+        expect(err).to.be.null();
         expect(bookData).to.be.an("object");
 
         expect(bookData.id).to.equal(bookId);
@@ -65,7 +65,7 @@ describe("books", function () {
 
     it("should error on a missing file", function (done) {
       books.load("made-up-filename.json", function (err, bookData) {
-        expect(bookData).to.be.a("undefined");
+        expect(bookData).to.be.undefined();
         expect(err).to.be.an.instanceOf(Error);
 
         done();
@@ -73,8 +73,8 @@ describe("books", function () {
     });
 
     it("should error on invalid json", function (done) {
-      books.load(fixturePath + "books/1invalid-json-book.json", function (err, bookData) {
-        expect(bookData).to.be.an("undefined");
+      books.load(booksPath + "1invalid-json-book.json", function (err, bookData) {
+        expect(bookData).to.be.undefined();
         expect(err).to.be.an.instanceOf(Error);
 
         done();
@@ -87,10 +87,10 @@ describe("books", function () {
       expect(books).to.respondTo("loadAll");
 
       books.load(
-        fixturePath + "books/" + bookId + ".json",
+        booksPath + bookId + ".json",
         function (err, bookData) {
           books.loadAll(
-            fixturePath + "books",
+            booksPath,
             function (err, allBooks) {
               expect(allBooks).to.be.an("object");
               expect(Object.keys(allBooks)).to.have.length(1);
@@ -108,7 +108,7 @@ describe("books", function () {
         "made up path",
         function (err, allBooks) {
           expect(err).to.be.an.instanceOf(Error);
-          expect(allBooks).to.be.undefined;
+          expect(allBooks).to.be.undefined();
 
           return done();
         }
@@ -121,7 +121,7 @@ describe("books", function () {
       expect(books).to.respondTo("get");
 
       books.load(
-        fixturePath + "books/" + bookId + ".json",
+        booksPath + bookId + ".json",
         function (err, expectedData) {
           var bookData = books.get(bookId);
           expect(bookData).to.be.an("object");
@@ -135,7 +135,7 @@ describe("books", function () {
     it("should handle unknown ids", function () {
       var bookData = books.get("made-up-id");
 
-      expect(bookData).to.be.undefined;
+      expect(bookData).to.be.undefined();
     });
   });
 
