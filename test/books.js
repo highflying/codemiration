@@ -1,6 +1,6 @@
 var tests  = require("../test-helpers");
 var expect = tests.expect;
-var books  = require("../lib/books.js");
+var books  = require("lib/books");
 
 var bookId    = "book";
 var booksPath = tests.fixturePath + "books/";

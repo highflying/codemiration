@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/highflying/codemiration#readme",
   "dependencies": {
+    "app-module-path": "git@github.com:highflying/app-module-path-node.git",
     "async": "^1.2.1",
     "bower": "^1.4.1",
     "chai": "^3.0.0",
@@ -33,6 +34,7 @@
     "gulp-uglify": "^1.2.0",
     "jjv": "^1.0.2",
     "mocha": "^2.2.5",
+    "supertest": "^1.0.1",
     "swig": "^1.4.2"
   }
 }

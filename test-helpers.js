@@ -1,3 +1,5 @@
+require('app-module-path').addPath(__dirname);
+
 var chai      = require("chai");
 var dirtyChai = require("dirty-chai");
 
