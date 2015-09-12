@@ -1,6 +1,6 @@
 var tests  = require("../test-helpers");
 var expect = tests.expect;
-var topics = require("../lib/topics.js");
+var topics = require("lib/topics");
 
 var topicId   = "topic";
 var topicPath = tests.fixturePath + "topics/";

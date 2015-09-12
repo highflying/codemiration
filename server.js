@@ -1,7 +1,9 @@
-var app    = require("./lib/app.js");
+require('app-module-path').addPath(__dirname);
+
+var app    = require("lib/app");
 var async  = require("async");
-var books  = require("./lib/books");
-var topics = require("./lib/topics");
+var books  = require("lib/books");
+var topics = require("lib/topics");
 
 app.set("port", process.env.PORT || 3000);
 

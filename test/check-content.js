@@ -3,8 +3,8 @@ var expect = tests.expect;
 var jjv    = require("jjv");
 var fs     = require("fs");
 
-var books  = require("../lib/books.js");
-var topics = require("../lib/topics.js");
+var books  = require("lib/books");
+var topics = require("lib/topics");
 
 describe("check topics", function () {
   validate("topic", "content/topics/", topics.load);
