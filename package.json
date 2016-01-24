@@ -26,9 +26,7 @@
     "async": "^1.5.2",
     "express": "^4.13.4",
     "jjv": "^1.0.2",
-    "swig": "^1.4.2"
-  },
-  "devDependencies": {
+    "swig": "^1.4.2",
     "bower": "^1.7.4",
     "chai": "^3.4.1",
     "dirty-chai": "^1.2.2",
