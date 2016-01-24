@@ -1,8 +1,8 @@
-var gulp      = require("gulp");
-var minifyCSS = require("gulp-minify-css");
-var concat    = require("gulp-concat");
-var uglify    = require("gulp-uglify");
-var sass      = require("gulp-sass");
+var gulp    = require("gulp");
+var cssnano = require("gulp-cssnano");
+var concat  = require("gulp-concat");
+var uglify  = require("gulp-uglify");
+var sass    = require("gulp-sass");
 
 gulp.task("default", ["minify-css", "build-js"]);
 
@@ -21,11 +21,7 @@ gulp.task("minify-css", ["compile-sass"], function() {
 
   return gulp
     .src("./static/css/screen.css")
-    .pipe(
-      minifyCSS({
-        relativeTo: "./static",
-      })
-    )
+    .pipe(cssnano())
     .pipe(concat("all.css"))
     .pipe(gulp.dest("./static/css"));
 });
