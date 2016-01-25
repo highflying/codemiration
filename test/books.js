@@ -1,30 +1,33 @@
-var tests  = require("../test-helpers");
+/* global describe, it */
+
+var tests = require('../test-helpers');
 var expect = tests.expect;
-var books  = require("lib/books");
+var books = require('lib/books');
 
-var bookId    = "book";
-var booksPath = tests.fixturePath + "books/";
+var bookId = 'book';
+var booksPath = tests.fixturePath + 'books/';
+var badBooksPath = tests.fixturePath + 'bad-books/';
 
-describe("books", function () {
-  describe("findFiles()", function () {
-    it("should find all books in a given path", function (done) {
-      expect(books).to.respondTo("findFiles");
+describe('books', function () {
+  describe('findFiles()', function () {
+    it('should find all books in a given path', function (done) {
+      expect(books).to.respondTo('findFiles');
 
-      books.findFiles(booksPath, function (err, fileList) {
+      books.findFiles(badBooksPath, function (err, fileList) {
         expect(err).to.be.null();
-        expect(fileList).to.be.an("array");
+        expect(fileList).to.be.an('array');
         expect(fileList).to.deep.equal([
-          booksPath + "1invalid-json-book.json",
-          booksPath + bookId + ".json",
+          badBooksPath + '1invalid-json-book.json',
+          badBooksPath + bookId + '.json'
         ]);
 
         done();
       });
     });
 
-    it("should error on an invalid path", function (done) {
+    it('should error on an invalid path', function (done) {
       books.findFiles(
-        "made up path",
+        'made up path',
         function (err, fileList) {
           expect(err).to.be.an.instanceOf(Error);
           expect(fileList).to.be.undefined();
@@ -35,36 +38,35 @@ describe("books", function () {
     });
   });
 
-  describe("load()", function () {
+  describe('load()', function () {
+    it('should read valid json file', function (done) {
+      expect(books).to.respondTo('load');
 
-    it("should read valid json file", function (done) {
-      expect(books).to.respondTo("load");
-
-      books.load(booksPath + bookId + ".json", function (err, bookData) {
+      books.load(booksPath + bookId + '.json', function (err, bookData) {
         expect(err).to.be.null();
-        expect(bookData).to.be.an("object");
+        expect(bookData).to.be.an('object');
 
         expect(bookData.id).to.equal(bookId);
-        expect(bookData.title).to.be.a("string");
-        expect(bookData.subtitle).to.be.a("string");
-        expect(bookData.author).to.be.an("array");
-        expect(bookData.publisher).to.be.a("string");
-        expect(bookData.year).to.be.a("number");
-        expect(bookData.isbn).to.be.a("string");
+        expect(bookData.title).to.be.a('string');
+        expect(bookData.subtitle).to.be.a('string');
+        expect(bookData.author).to.be.an('array');
+        expect(bookData.publisher).to.be.a('string');
+        expect(bookData.year).to.be.a('number');
+        expect(bookData.isbn).to.be.a('string');
 
-        expect(bookData.title).to.equal("Essential Skills for the Agile Developer");
-        expect(bookData.subtitle).to.equal("A Guide to Better Programming and Design");
-        expect(bookData.author).to.deep.equal(["Alan Shalloway", "Scott Bain", "Ken Pugh", "Amir Kolsky"]);
-        expect(bookData.publisher).to.equal("Addison-Wesley");
+        expect(bookData.title).to.equal('Essential Skills for the Agile Developer');
+        expect(bookData.subtitle).to.equal('A Guide to Better Programming and Design');
+        expect(bookData.author).to.deep.equal(['Alan Shalloway', 'Scott Bain', 'Ken Pugh', 'Amir Kolsky']);
+        expect(bookData.publisher).to.equal('Addison-Wesley');
         expect(bookData.year).to.equal(2011);
-        expect(bookData.isbn).to.equal("9780321543738");
-        
+        expect(bookData.isbn).to.equal('9780321543738');
+
         done();
       });
     });
 
-    it("should error on a missing file", function (done) {
-      books.load("made-up-filename.json", function (err, bookData) {
+    it('should error on a missing file', function (done) {
+      books.load('made-up-filename.json', function (err, bookData) {
         expect(bookData).to.be.undefined();
         expect(err).to.be.an.instanceOf(Error);
 
@@ -72,8 +74,8 @@ describe("books", function () {
       });
     });
 
-    it("should error on invalid json", function (done) {
-      books.load(booksPath + "1invalid-json-book.json", function (err, bookData) {
+    it('should error on invalid json', function (done) {
+      books.load(booksPath + '1invalid-json-book.json', function (err, bookData) {
         expect(bookData).to.be.undefined();
         expect(err).to.be.an.instanceOf(Error);
 
@@ -82,17 +84,21 @@ describe("books", function () {
     });
   });
 
-  describe("loadAll()", function () {
-    it("should load all available books", function (done) {
-      expect(books).to.respondTo("loadAll");
+  describe('loadAll()', function () {
+    it('should load all available books', function (done) {
+      expect(books).to.respondTo('loadAll');
 
       books.load(
-        booksPath + bookId + ".json",
+        booksPath + bookId + '.json',
         function (err, bookData) {
+          expect(err).to.be.null();
+
           books.loadAll(
             booksPath,
             function (err, allBooks) {
-              expect(allBooks).to.be.an("object");
+              expect(err).to.be.null();
+
+              expect(allBooks).to.be.an('object');
               expect(Object.keys(allBooks)).to.have.length(1);
               expect(allBooks).to.have.property(bookId);
               expect(allBooks[bookId]).to.deep.equal(bookData);
@@ -103,9 +109,9 @@ describe("books", function () {
       );
     });
 
-    it("should error on an invalid path", function (done) {
+    it('should error on an invalid path', function (done) {
       books.loadAll(
-        "made up path",
+        'made up path',
         function (err, allBooks) {
           expect(err).to.be.an.instanceOf(Error);
           expect(allBooks).to.be.undefined();
@@ -116,15 +122,17 @@ describe("books", function () {
     });
   });
 
-  describe("get()", function () {
-    it("should return a single book by id", function (done) {
-      expect(books).to.respondTo("get");
+  describe('get()', function () {
+    it('should return a single book by id', function (done) {
+      expect(books).to.respondTo('get');
 
       books.load(
-        booksPath + bookId + ".json",
+        booksPath + bookId + '.json',
         function (err, expectedData) {
+          expect(err).to.be.null();
+
           var bookData = books.get(bookId);
-          expect(bookData).to.be.an("object");
+          expect(bookData).to.be.an('object');
           expect(bookData).to.deep.equal(expectedData);
 
           done();
@@ -132,11 +140,10 @@ describe("books", function () {
       );
     });
 
-    it("should handle unknown ids", function () {
-      var bookData = books.get("made-up-id");
+    it('should handle unknown ids', function () {
+      var bookData = books.get('made-up-id');
 
       expect(bookData).to.be.undefined();
     });
   });
-
 });
